@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Database</title>
+  <link rel="stylesheet" href="commonStyles.css" />
+</head>
+
+<body>
+  <div id="links">
+    <div><a href="index.html">Home</a></div>
+    <div><a href="contact.html">Contact List</a></div>
+    <div><a href="favourites.html">Favourites</a></div>
+  </div>
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>Contact Name</th>
+          <th>Mobile Number</th>
+          <th>Type</th>
+          <th>Favourites</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Append your output to tbody -->
+      </tbody>
+    </table>
+  </main>
+</body>
+<script>
+  //code your js part here
+  //append your output to tbody
+  var contactList = JSON.parse(localStorage.getItem("contactList")) || []
+  contactList.map(function (elemt) {
+    var tr = document.createElement("tr")
+
+    var td1 = document.createElement("td")
+    td1.innerText=elemt.NameItem
+
+    var td2 = document.createElement("td")
+    td2.innerText=elemt.NumberItem
+
+    var td3 = document.createElement("td")
+    td3.innerText=elemt.TypeItem
+
+    var td4 = document.createElement("td")
+
+    var button = document.createElement("button")
+    button.innerText="Add To Favourites"
+    button.addEventListener("click",function(){
+      Add_To_Fevourites(elemt)
+    })
+    td4.append(button)
+    tr.append(td1,td2,td3,td4)
+
+    document.querySelector("tbody").append(tr)
+  })
+
+
+  function Add_To_Fevourites(elemt){
+    var favourites = JSON.parse(localStorage.getItem("favourites")) || []
+    favourites.push(elemt)
+    console.log(favourites)
+    localStorage.setItem("favourites",JSON.stringify(favourites))
+  }
+
+</script>
+
+</html>
